@@ -57,7 +57,7 @@ export default function FinalScreen() {
           setTypingComplete(true)
           clearInterval(typingInterval)
         }
-      }, 30)
+      }, 25)
 
       return () => clearInterval(typingInterval)
     }
@@ -150,7 +150,7 @@ export default function FinalScreen() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.8, type: "spring", stiffness: 100, damping: 20 }}
             >
-              <motion.div className="bg-pink-950/20 backdrop-blur-md border border-pink-500/30 shadow-2xl rounded-3xl p-8">
+              <motion.div className="bg-pink-950/20 backdrop-blur-xl border border-pink-400/30 shadow-[0_0_80px_rgba(236,72,153,0.25)] rounded-3xl p-8">
                 <div
                   ref={messageRef}
                   className="h-80 overflow-y-auto text-left pr-2.5"
@@ -159,7 +159,7 @@ export default function FinalScreen() {
                     scrollbarColor: "rgba(236, 72, 153, 0.3) transparent",
                   }}
                 >
-                  <div className="text-pink-200 leading-relaxed whitespace-pre-line">
+                  <div className="font-love love-glow text-pink-200 leading-relaxed whitespace-pre-line text-lg md:text-xl">
                     {displayedText}
                     {!typingComplete && (
                       <motion.span
