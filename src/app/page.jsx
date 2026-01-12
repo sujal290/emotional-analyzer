@@ -8,6 +8,8 @@ import BalloonsScreen from "../components/BalloonsScreen"
 import PhotoScreen from "../components/PhotoScreen"
 import FinalScreen from "../components/FinalScreen"
 import CuteLoader from "../components/CuteLoader"
+import BackgroundMusic from "../components/BackgroundMusic"
+
 
 export default function ProposalSite() {
   const [currentScreen, setCurrentScreen] = useState("loader")
@@ -27,7 +29,62 @@ export default function ProposalSite() {
   }
 
   return (
-    <div className="aurora-bg emotional-meter min-h-screen relative overflow-hidden">
+    <div className=" aurora-bg emotional-meter min-h-screen relative overflow-hidden">
+      <BackgroundMusic />
+      <div className="light-dust">
+    {Array.from({ length: 35 }).map((_, i) => (
+      <span
+        key={i}
+        style={{
+          left: Math.random() * 100 + "%",
+          animationDuration: 10 + Math.random() * 20 + "s",
+          animationDelay: Math.random() * 10 + "s"
+        }}
+      />
+    ))}
+  </div>
+
+  <div className="heart-rain">
+  {Array.from({ length: 25 }).map((_, i) => (
+    <span
+      key={i}
+      style={{
+        left: Math.random() * 100 + "%",
+        animationDuration: 12 + Math.random() * 18 + "s",
+        animationDelay: Math.random() * 10 + "s"
+      }}
+    />
+  ))}
+</div>
+
+<div className="shooting-stars">
+  {Array.from({ length: 6 }).map((_, i) => (
+    <span
+      key={i}
+      style={{
+        top: Math.random() * 80 + "%",
+        left: Math.random() * 100 + "%",
+        animationDuration: 6 + Math.random() * 8 + "s",
+        animationDelay: Math.random() * 6 + "s"
+      }}
+    />
+  ))}
+</div>
+<div className="fireflies">
+  {Array.from({ length: 18 }).map((_, i) => (
+    <span
+      key={i}
+      style={{
+        top: Math.random() * 100 + "%",
+        left: Math.random() * 100 + "%",
+        animationDuration: 6 + Math.random() * 10 + "s",
+        animationDelay: Math.random() * 8 + "s"
+      }}
+    />
+  ))}
+</div>
+
+
 
       <AnimatePresence mode="wait">
         {isLoading && <CuteLoader key="loader" onComplete={() => setCurrentScreen("first")} />}

@@ -7,12 +7,11 @@
   --foreground: #171717;
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -242,3 +241,160 @@ button {
     pointer-events: auto;
   }
 }
+
+
+.aurora-bg {
+  position: relative;
+  background: radial-gradient(circle at 20% 20%, rgba(255,80,160,0.15), transparent 60%),
+              radial-gradient(circle at 80% 30%, rgba(180,90,255,0.18), transparent 60%),
+              radial-gradient(circle at 50% 80%, rgba(255,120,180,0.14), transparent 60%),
+              linear-gradient(180deg, #04000a, #0b0015, #16001f);
+  overflow: hidden;
+}
+
+/* Floating glow orbs */
+.aurora-bg::before,
+.aurora-bg::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(255,120,200,0.25), transparent 60%);
+  filter: blur(120px);
+  animation: floatGlow 20s infinite alternate ease-in-out;
+}
+
+.aurora-bg::after {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(180,120,255,0.25), transparent 60%);
+  animation-delay: 10s;
+}
+
+@keyframes floatGlow {
+  from {
+    transform: translate(-10%, -10%);
+  }
+  to {
+    transform: translate(60%, 40%);
+  }
+}
+
+
+/* Floating emotional light dust */
+.light-dust {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.light-dust span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: radial-gradient(circle, rgba(255,170,230,0.9), rgba(255,170,230,0));
+  border-radius: 50%;
+  filter: blur(0.5px);
+  animation: dustFloat linear infinite;
+}
+
+@keyframes dustFloat {
+  from {
+    transform: translateY(110vh) translateX(0);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  to {
+    transform: translateY(-20vh) translateX(80px);
+    opacity: 0;
+  }
+}
+/* Soft heart petal rain */
+.heart-rain {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.heart-rain span {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 30% 30%, #ff9acb, #ff4d8d);
+  clip-path: path("M7 13 C1 8 0 4 3 2 C5 0 7 2 7 3 C7 2 9 0 11 2 C14 4 13 8 7 13 Z");
+  opacity: .7;
+  animation: fallHeart linear infinite;
+  filter: drop-shadow(0 0 6px rgba(255,100,180,.6));
+}
+
+@keyframes fallHeart {
+  from {
+    transform: translateY(-15vh) rotate(0deg);
+  }
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+
+/* Shooting stars */
+.shooting-stars {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.shooting-stars span {
+  position: absolute;
+  width: 160px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), #ffd6f3, rgba(255,255,255,0));
+  filter: drop-shadow(0 0 8px rgba(255,200,240,0.9));
+  animation: shootStar linear infinite;
+  opacity: .8;
+}
+
+@keyframes shootStar {
+  from {
+    transform: translate(-20vw, -20vh) rotate(25deg);
+  }
+  to {
+    transform: translate(120vw, 120vh) rotate(25deg);
+  }
+}
+
+
+/* Fireflies */
+.fireflies {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 4;
+}
+
+.fireflies span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #ffeaa7, rgba(255,234,167,0));
+  border-radius: 50%;
+  filter: blur(0.6px);
+  animation: flyFirefly ease-in-out infinite;
+  opacity: .9;
+}
+
+@keyframes flyFirefly {
+  0%   { transform: translate(0,0); opacity:.3 }
+  50%  { transform: translate(40px,-60px); opacity:1 }
+  100% { transform: translate(-30px,40px); opacity:.3 }
+}
+
+
