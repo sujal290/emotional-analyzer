@@ -185,31 +185,108 @@
 
 
 
+# import os
+# from fastapi import FastAPI, HTTPException
+# from fastapi.middleware.cors import CORSMiddleware
+# from pydantic import BaseModel
+# from apify_client import ApifyClient
+
+# app = FastAPI()
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# class AnalyzeRequest(BaseModel):
+#     username: str
+
+# @app.post("/analyze")
+# def analyze(req: AnalyzeRequest):
+#     token = os.getenv("APIFY_TOKEN")
+#     if not token:
+#         raise HTTPException(status_code=500, detail="APIFY token missing")
+
+#     client = ApifyClient(token)
+
+#     username = req.username.replace("@", "").strip()
+#     if not username:
+#         raise HTTPException(status_code=400, detail="Invalid username")
+
+#     run = client.actor("CJdippxWmn9uRfooo").call(
+#         run_input={
+#             "from": username,
+#             "maxItems": 30,
+#             "lang": "en",
+#             "-filter:replies": True,
+#         }
+#     )
+
+#     tweets = []
+#     dataset = client.dataset(run["defaultDatasetId"])
+#     for item in dataset.iterate_items():
+#         if "text" in item:
+#             tweets.append({
+#                 "id": item.get("id"),
+#                 "text": item.get("text"),
+#                 "likes": item.get("likeCount", 0),
+#                 "retweets": item.get("retweetCount", 0),
+#                 "replies": item.get("replyCount", 0),
+#                 "url": item.get("url"),
+#                 "createdAt": item.get("createdAt"),
+#             })
+
+#     return {"username": username, "tweets": tweets}
+
+
 import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from apify_client import ApifyClient
 
-app = FastAPI()
+# ---------------- APP ----------------
+
+app = FastAPI(title="Twitter Posts API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # later restrict to Vercel domain
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# ---------------- ENV ----------------
+
+APIFY_TOKEN = os.getenv("APIFY_TOKEN")
+
+if not APIFY_TOKEN:
+    # ❌ DO NOT crash Railway container
+    print("⚠️ APIFY_TOKEN not found (Railway variable missing)")
+    client = None
+else:
+    client = ApifyClient(APIFY_TOKEN)
+
+# ---------------- SCHEMA ----------------
+
 class AnalyzeRequest(BaseModel):
     username: str
 
+# ---------------- ROUTES ----------------
+
+@app.get("/")
+def root():
+    return {"status": "Backend running 🚀"}
+
 @app.post("/analyze")
 def analyze(req: AnalyzeRequest):
-    token = os.getenv("APIFY_TOKEN")
-    if not token:
-        raise HTTPException(status_code=500, detail="APIFY token missing")
-
-    client = ApifyClient(token)
+    if client is None:
+        raise HTTPException(
+            status_code=500,
+            detail="APIFY_TOKEN not configured on server"
+        )
 
     username = req.username.replace("@", "").strip()
     if not username:
@@ -226,16 +303,23 @@ def analyze(req: AnalyzeRequest):
 
     tweets = []
     dataset = client.dataset(run["defaultDatasetId"])
-    for item in dataset.iterate_items():
-        if "text" in item:
-            tweets.append({
-                "id": item.get("id"),
-                "text": item.get("text"),
-                "likes": item.get("likeCount", 0),
-                "retweets": item.get("retweetCount", 0),
-                "replies": item.get("replyCount", 0),
-                "url": item.get("url"),
-                "createdAt": item.get("createdAt"),
-            })
 
-    return {"username": username, "tweets": tweets}
+    for item in dataset.iterate_items():
+        if "text" not in item:
+            continue
+
+        tweets.append({
+            "id": item.get("id"),
+            "text": item.get("text"),
+            "likes": item.get("likeCount", 0),
+            "retweets": item.get("retweetCount", 0),
+            "replies": item.get("replyCount", 0),
+            "url": item.get("url"),
+            "createdAt": item.get("createdAt"),
+        })
+
+    return {
+        "username": username,
+        "count": len(tweets),
+        "tweets": tweets
+    }
