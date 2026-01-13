@@ -422,3 +422,7 @@ button {
 .love-glow {
   animation: romanticGlow 4s ease-in-out infinite;
 }
+
+.glow-text {
+  text-shadow: 0 0 12px rgba(255,120,180,0.6);
+}

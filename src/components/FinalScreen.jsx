@@ -31,8 +31,6 @@ export default function FinalScreen() {
                           ek bilkul normal sa dost,
                           jo shayad aapki zindagi ka koi khaas hissa nahi,
                           par aapki khushi ke liye hamesha dil se dua karta hai.
-
-                          Mujhe kisi haq ki zarurat nahi,
                           kisi vaade ki bhi nahi.
                           Bas itna hi kaafi hai ki,
                           jab kabhi aap thak jaayein,
@@ -57,7 +55,7 @@ export default function FinalScreen() {
           setTypingComplete(true)
           clearInterval(typingInterval)
         }
-      }, 25)
+      }, 15)
 
       return () => clearInterval(typingInterval)
     }
@@ -150,7 +148,8 @@ export default function FinalScreen() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.8, type: "spring", stiffness: 100, damping: 20 }}
             >
-              <motion.div className="bg-pink-950/20 backdrop-blur-xl border border-pink-400/30 shadow-[0_0_80px_rgba(236,72,153,0.25)] rounded-3xl p-8">
+              {/* <motion.div className="bg-pink-950/20 backdrop-blur-xl border border-pink-400/30 shadow-[0_0_80px_rgba(236,72,153,0.25)] rounded-3xl p-8"> */}
+                <motion.div className="relative backdrop-blur-2xl bg-white/5 border border-white/10 rounded-3xl p-8 shadow-[0_0_120px_rgba(255,105,180,0.35)]">
                 <div
                   ref={messageRef}
                   className="h-80 overflow-y-auto text-left pr-2.5"
@@ -159,7 +158,7 @@ export default function FinalScreen() {
                     scrollbarColor: "rgba(236, 72, 153, 0.3) transparent",
                   }}
                 >
-                  <div className="font-love love-glow text-pink-200 leading-relaxed whitespace-pre-line text-lg md:text-xl">
+                  <div className="font-love love-glow text-pink-200 leading-relaxed whitespace-pre-line text-lg md:text-xl glow-text">
                     {displayedText}
                     {!typingComplete && (
                       <motion.span
