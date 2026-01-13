@@ -158,7 +158,7 @@ export default function Analyzer() {
       //   })
       // })
 
-      const res = await fetch("/api/analyze", {
+      const res = await fetch("https://krishugsg-production.up.railway.app/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
