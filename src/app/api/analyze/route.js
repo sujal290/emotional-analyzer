@@ -1,34 +1,12 @@
-import { NextResponse } from "next/server"
-import { XMLParser } from "fast-xml-parser"
-
 export async function POST(req) {
-  const { username } = await req.json()
+  const body = await req.json()
 
-  try {
-    const newsUrl = `https://news.google.com/rss/search?q=site:x.com/${username}+when:7d`
-    const res = await fetch(newsUrl)
+  const res = await fetch("http://127.0.0.1:8000/analyze", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  })
 
-    if (!res.ok) {
-      return NextResponse.json({ error: "Profile not found" }, { status: 404 })
-    }
-
-    const xml = await res.text()
-    const parser = new XMLParser()
-    const data = parser.parse(xml)
-
-    const items = data.rss?.channel?.item
-
-    if (!items) {
-      return NextResponse.json({ error: "No tweets found" }, { status: 404 })
-    }
-
-    const tweets = Array.isArray(items)
-      ? items.map(i => i.title)
-      : [items.title]
-
-    return NextResponse.json({ tweets })
-
-  } catch (err) {
-    return NextResponse.json({ error: "Failed fetching feed" }, { status: 500 })
-  }
+  const data = await res.json()
+  return Response.json(data)
 }

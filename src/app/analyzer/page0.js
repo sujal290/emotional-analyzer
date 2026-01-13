@@ -7,8 +7,6 @@ import { useRouter } from "next/navigation"
 import AnalyzerMusic from "./AnalyzerMusic"
 
 
-
-
 export default function Analyzer() {
   const router = useRouter()
 
@@ -62,7 +60,7 @@ export default function Analyzer() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f051d] via-[#1a062f] to-[#0f051d] text-white px-4">
-      <AnalyzerMusic/>
+    <AnalyzerMusic/>
       <motion.div
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -72,28 +70,13 @@ export default function Analyzer() {
 
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-bold text-pink-400 text-center mb-6">
-          Twitter Personality Analyzer ✨
+          Work in Progress ✨
         </h1>
 
-        {/* Input */}
-        <div className="relative">
-          <Twitter className="absolute left-4 top-1/2 -translate-y-1/2 text-blue-400" />
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter Twitter username (without @)"
-            className="w-full pl-12 pr-4 py-3 rounded-xl bg-black/30 border border-white/10 text-white outline-none focus:ring-2 focus:ring-pink-400"
-          />
-        </div>
+        
 
         {/* Button */}
-        <button
-          onClick={handleAnalyze}
-          disabled={loading}
-          className="mt-5 w-full bg-pink-500 hover:bg-pink-600 disabled:opacity-50 transition py-3 rounded-xl font-semibold"
-        >
-          {loading ? "Analyzing..." : "Analyze Profile"}
-        </button>
+        
 
         {/* Loader */}
         {loading && (
