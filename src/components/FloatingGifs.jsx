@@ -2,37 +2,64 @@
 
 // import { motion } from "framer-motion"
 
+// /* GIF SOURCES */
 // const GIFS = [
-//   "/gif/cute.gif",
+// //   "/gif/cute.gif",
 //   "/gif/please.gif",
 //   "/gif/tears.gif",
+//   "/gif/cut.gif",
+//   "/gif/dance.gif",
+//   "/gif/kissss.gif",
+//   "/gif/touch.gif",
+//   "/gif/eye.gif",
 // ]
+
+// /* HOW MANY FLOATING GIFS */
+// const TOTAL_GIFS = 100
 
 // export default function FloatingGifs() {
 //   return (
 //     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-//       {GIFS.map((gif, index) => (
-//         <motion.img
-//           key={index}
-//           src={gif}
-//           alt="floating gif"
-//           className="absolute w-24 h-24 opacity-30"
-//           initial={{
-//             x: Math.random() * 100 + "vw",
-//             y: "110vh",
-//           }}
-//           animate={{
-//             y: "-20vh",
-//             x: Math.random() * 100 + "vw",
-//           }}
-//           transition={{
-//             duration: 20 + Math.random() * 10,
-//             repeat: Infinity,
-//             ease: "linear",
-//             delay: index * 2,
-//           }}
-//         />
-//       ))}
+//       {Array.from({ length: TOTAL_GIFS }).map((_, index) => {
+//         const gif = GIFS[index % GIFS.length]
+
+//         /* 🔥 BIGGER SIZE */
+//         const size = 48 + Math.random() * 92   // 48px → 140px
+
+//         const startX = Math.random() * 100
+//         const endX = Math.random() * 100
+//         const duration = 20 + Math.random() * 25
+//         const delay = Math.random() * 20
+//         const opacity = 0.2 + Math.random() * 0.4
+
+//         return (
+//           <motion.img
+//             key={index}
+//             src={gif}
+//             alt="floating gif"
+//             className="absolute"
+//             style={{
+//               width: size,
+//               height: size,
+//               opacity,
+//             }}
+//             initial={{
+//               x: `${startX}vw`,
+//               y: "110vh",
+//             }}
+//             animate={{
+//               x: `${endX}vw`,
+//               y: "-25vh",
+//             }}
+//             transition={{
+//               duration,
+//               delay,
+//               repeat: Infinity,
+//               ease: "linear",
+//             }}
+//           />
+//         )
+//       })}
 //     </div>
 //   )
 // }
@@ -44,7 +71,6 @@ import { motion } from "framer-motion"
 
 /* GIF SOURCES */
 const GIFS = [
-  "/gif/cute.gif",
   "/gif/please.gif",
   "/gif/tears.gif",
   "/gif/cut.gif",
@@ -52,11 +78,10 @@ const GIFS = [
   "/gif/kissss.gif",
   "/gif/touch.gif",
   "/gif/eye.gif",
- 
 ]
 
 /* HOW MANY FLOATING GIFS */
-const TOTAL_GIFS = 100  // 🔥 change to 200 if you want more
+const TOTAL_GIFS = 1000
 
 export default function FloatingGifs() {
   return (
@@ -64,37 +89,53 @@ export default function FloatingGifs() {
       {Array.from({ length: TOTAL_GIFS }).map((_, index) => {
         const gif = GIFS[index % GIFS.length]
 
-        const size = 16 + Math.random() * 40       // px
-        const startX = Math.random() * 100
-        const endX = Math.random() * 100
+        // 🔥 BIGGER SIZE
+        const size = 50 + Math.random() * 90 // 50px → 140px
+        const opacity = 0.2 + Math.random() * 0.4
+
+        // 🎯 CENTER OF SCREEN
+        const startX = 50
+        const startY = 50
+
+        // 🎯 RANDOM DIRECTION (ANGLE)
+        const angle = Math.random() * Math.PI * 2
+        const distance = 60 + Math.random() * 80 // how far it flies
+
+        const endX = startX + Math.cos(angle) * distance
+        const endY = startY + Math.sin(angle) * distance
+
         const duration = 18 + Math.random() * 20
-        const delay = Math.random() * 20
-        const opacity = 0.15 + Math.random() * 0.35
+        const delay = Math.random() * 10
 
         return (
           <motion.img
             key={index}
             src={gif}
             alt="floating gif"
-            className="absolute"
+            className="absolute select-none"
             style={{
               width: size,
               height: size,
               opacity,
+              left: "0",
+              top: "0",
             }}
             initial={{
               x: `${startX}vw`,
-              y: "110vh",
+              y: `${startY}vh`,
+              scale: 0.4,
             }}
             animate={{
               x: `${endX}vw`,
-              y: "-20vh",
+              y: `${endY}vh`,
+              scale: 1,
             }}
             transition={{
               duration,
               delay,
               repeat: Infinity,
-              ease: "linear",
+              repeatType: "loop",
+              ease: "easeOut",
             }}
           />
         )
@@ -102,4 +143,3 @@ export default function FloatingGifs() {
     </div>
   )
 }
-

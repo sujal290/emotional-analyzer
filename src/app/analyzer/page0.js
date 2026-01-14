@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Sparkles, Heart, Twitter } from "lucide-react"
 import { useRouter } from "next/navigation"
 import AnalyzerMusic from "./AnalyzerMusic"
+import FloatingGifs from "../../components/FloatingGifs"
 
 
 export default function Analyzer() {
@@ -61,6 +62,7 @@ export default function Analyzer() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f051d] via-[#1a062f] to-[#0f051d] text-white px-4">
     <AnalyzerMusic/>
+    <FloatingGifs/>
       <motion.div
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
