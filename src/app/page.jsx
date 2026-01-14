@@ -9,6 +9,8 @@ import PhotoScreen from "../components/PhotoScreen"
 import FinalScreen from "../components/FinalScreen"
 import CuteLoader from "../components/CuteLoader"
 import BackgroundMusic from "../components/BackgroundMusic"
+import BlanketNightSong from "../components/BlanketNightSong"
+
 
 
 
@@ -16,6 +18,9 @@ import BackgroundMusic from "../components/BackgroundMusic"
 export default function ProposalSite() {
   const [currentScreen, setCurrentScreen] = useState("loader")
   const [isLoading, setIsLoading] = useState(true)
+  const [fadeBgMusic, setFadeBgMusic] = useState(false)
+
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,7 +37,8 @@ export default function ProposalSite() {
 
   return (
     <div className=" aurora-bg emotional-meter min-h-screen relative overflow-hidden">
-      <BackgroundMusic />
+      <BackgroundMusic fadeOut={fadeBgMusic} />
+
       
       <div className="light-dust">
     {Array.from({ length: 35 }).map((_, i) => (
@@ -89,7 +95,7 @@ export default function ProposalSite() {
 
 
 
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         {isLoading && <CuteLoader key="loader" onComplete={() => setCurrentScreen("first")} />}
 
         {currentScreen === "first" && <FirstScreen key="first" onNext={() => nextScreen("question1")} />}
@@ -117,7 +123,93 @@ export default function ProposalSite() {
         {currentScreen === "photos" && <PhotoScreen key="photos" onNext={() => nextScreen("final")} />}
 
         {currentScreen === "final" && <FinalScreen key="final" />}
-      </AnimatePresence>
+
+
+        
+      </AnimatePresence> */}
+
+
+      <AnimatePresence mode="wait">
+  {isLoading && <CuteLoader key="loader" />}
+
+  {currentScreen === "first" && <FirstScreen key="first" onNext={() => nextScreen("question1")} />}
+
+  {currentScreen === "question1" && (
+    <QuestionScreen
+      key="question1"
+      question="Do you like surprises?"
+      onYes={() => nextScreen("question2")}
+      isFirst={true}
+    />
+  )}
+
+  {currentScreen === "question2" && (
+    <QuestionScreen
+      key="question2"
+      question="Do you like Shyarii ?"
+      onYes={() => nextScreen("balloons")}
+      isFirst={false}
+    />
+  )}
+
+  {currentScreen === "balloons" && <BalloonsScreen key="balloons" onNext={() => nextScreen("photos")} />}
+
+  {currentScreen === "photos" && <PhotoScreen key="photos" onNext={() => nextScreen("final")} />}
+
+  {/* {currentScreen === "final" && (
+    <FinalScreen
+      key="final"
+      onNext={() => nextScreen("song")}
+    />
+  )}
+
+  {currentScreen === "song" && (
+    <motion.div
+      key="song"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
+      className="min-h-screen flex items-center justify-center px-4"
+    >
+      <BlanketNightSong />
+    </motion.div>
+  )} */}
+
+  {/* {currentScreen === "final" && (
+  <FinalScreen
+    key="final"
+    onNext={() => 
+      setCurrentScreen("song")
+      
+     }
+  />
+)} */}
+    {currentScreen === "final" && (
+  <FinalScreen
+    onNext={() => {
+      setFadeBgMusic(true)   // 🔇 fade background music
+      nextScreen("song")     // 🎶 go to song screen
+    }}
+  />
+)}
+
+
+{currentScreen === "song" && (
+  <motion.div
+    key="song"
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 1 }}
+    className="min-h-screen flex items-center justify-center px-4"
+  >
+    <BlanketNightSong />
+  </motion.div>
+)}
+
+</AnimatePresence>
+
 
       {/* Watermark */}
       <motion.div

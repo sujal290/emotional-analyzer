@@ -7,13 +7,23 @@ import { useRouter } from "next/navigation"
 import confetti from "canvas-confetti"
 
 
-export default function FinalScreen() {
+export default function FinalScreen({ onNext }) {
   const [cardOpen, setCardOpen] = useState(false)
   const [displayedText, setDisplayedText] = useState("")
   const [typingComplete, setTypingComplete] = useState(false)
   const [showOverlay, setShowOverlay] = useState(false)
   const messageRef = useRef(null)
   const router = useRouter()
+  const fireConfetti = () => {
+  const colors = ["#ff4d6d", "#ff80b5", "#c084fc", "#a855f7"]
+
+  confetti({
+    particleCount: 180,
+    spread: 120,
+    origin: { y: 0.75 },
+    colors,
+  })
+}
 
 
   const proposalMessage = `Aapki baatein samay se pare lagti hain,
@@ -192,15 +202,53 @@ export default function FinalScreen() {
                 Hope You will going to love it...!
               </motion.h2>
 
-              <motion.button
+              {/* <motion.button
                 onClick={() => router.push("/analyzer")}
                 className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 text-xl font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-2xl flex items-center justify-center mx-auto"
               >
                 <Heart className="w-5 h-5 mr-2 fill-current" />
                 Lets seeee.....
                 <Heart className="w-5 h-5 ml-2 fill-current" />
-              </motion.button>
 
+              </motion.button> */}
+
+              {/* <button
+                onClick={() => {
+                  fireConfetti()
+                  onNext()
+                }}
+              >
+                Play Song 🎵
+              </button> */}
+
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+
+                {/* Analyzer Button */}
+                <motion.button
+                  onClick={() => router.push("/analyzer")}
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-7 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-2xl flex items-center justify-center"
+                >
+                  <Heart className="w-5 h-5 mr-2 fill-current" />
+                  Lets seeee.....
+                  <Heart className="w-5 h-5 ml-2 fill-current" />
+                </motion.button>
+
+                {/* Song Button */}
+                <motion.button
+                  onClick={() => {
+                    fireConfetti()
+                    onNext()
+                  }}
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-7 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-2xl"
+                >
+                  🎵 Play Song
+                </motion.button>
+
+              </div>
+
+
+                            
             </motion.div>
           )}
         </AnimatePresence>
