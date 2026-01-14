@@ -11,6 +11,8 @@ import CuteLoader from "../components/CuteLoader"
 import BackgroundMusic from "../components/BackgroundMusic"
 
 
+
+
 export default function ProposalSite() {
   const [currentScreen, setCurrentScreen] = useState("loader")
   const [isLoading, setIsLoading] = useState(true)
@@ -31,6 +33,7 @@ export default function ProposalSite() {
   return (
     <div className=" aurora-bg emotional-meter min-h-screen relative overflow-hidden">
       <BackgroundMusic />
+      
       <div className="light-dust">
     {Array.from({ length: 35 }).map((_, i) => (
       <span

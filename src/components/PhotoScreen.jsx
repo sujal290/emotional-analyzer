@@ -33,6 +33,9 @@ export default function PhotoScreen({ onNext }) {
     { id: 4, src: "/images/k4.png" },
     { id: 5, src: "/images/k5.png" },
     { id: 6, src: "/images/k6.png" },
+    { id: 7, src: "/images/k7.jpg" },
+    { id: 8, src: "/images/k8.jpg" },
+    { id: 9, src: "/images/k9.jpg" },
   ]
 
     return (
