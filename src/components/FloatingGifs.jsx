@@ -48,6 +48,11 @@ const GIFS = [
   "/gif/please.gif",
   "/gif/tears.gif",
   "/gif/cut.gif",
+  "/gif/dance.gif",
+  "/gif/kissss.gif",
+  "/gif/touch.gif",
+  "/gif/eye.gif",
+ 
 ]
 
 /* HOW MANY FLOATING GIFS */
