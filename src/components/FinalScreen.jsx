@@ -230,7 +230,7 @@ export default function FinalScreen({ onNext }) {
                   className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-7 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-2xl flex items-center justify-center"
                 >
                   <Heart className="w-5 h-5 mr-2 fill-current" />
-                  Lets seeee.....
+                  Ana
                   <Heart className="w-5 h-5 ml-2 fill-current" />
                 </motion.button>
 
@@ -242,7 +242,7 @@ export default function FinalScreen({ onNext }) {
                   }}
                   className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-7 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-2xl"
                 >
-                  🎵 Play Song
+                  🤍 continue 🤍
                 </motion.button>
 
               </div>
