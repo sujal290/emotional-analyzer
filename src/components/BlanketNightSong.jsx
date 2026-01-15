@@ -28,69 +28,74 @@ export default function BlanketNightSong() {
   
 
   return (
-    <>{/* 🌸 LEFT SIDE IMAGES */}
-<div className="hidden lg:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col gap-10 z-10 pointer-events-none">
-  <img
-    src="/images/k7.jpg"
-    className="w-40 opacity-60 animate-[float_8s_ease-in-out_infinite]"
-    alt=""
-  />
-  <img
-    src="/images/k8.jpg"
-    className="w-40 opacity-60 animate-[float_10s_ease-in-out_infinite]"
-    alt=""
-  />
-  <img
-    src="/images/k9.jpg"
-    className="w-40 opacity-60 animate-[float_9s_ease-in-out_infinite]"
-    alt=""
-  />
+    <>
+    {/* 🌸 LEFT IMAGES (Desktop only) */}
+<div className="hidden lg:flex fixed left-4 top-1/2 -translate-y-1/2 flex-col gap-8 z-10 pointer-events-none">
+  {["k7.jpg","k8.jpg","k9.jpg"].map((img, i) => (
+    <img
+      key={i}
+      src={`/images/${img}`}
+      className="w-32 xl:w-40 opacity-40 animate-[float_8s_ease-in-out_infinite]"
+      alt=""
+    />
+  ))}
 </div>
 
-{/* 🌸 RIGHT SIDE IMAGES */}
-<div className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 flex-col gap-10 z-10 pointer-events-none">
-  <img
-    src="/images/k9.jpg"
-    className="w-40 opacity-60 animate-[float_9s_ease-in-out_infinite]"
-    alt=""
-  />
-  <img
-    src="/images/k8.jpg"
-    className="w-40 opacity-60 animate-[float_11s_ease-in-out_infinite]"
-    alt=""
-  />
-  <img
-    src="/images/k7.jpg"
-    className="w-40 opacity-60 animate-[float_8s_ease-in-out_infinite]"
-    alt=""
-  />
+{/* 🌸 RIGHT IMAGES (Desktop only) */}
+<div className="hidden lg:flex fixed right-4 top-1/2 -translate-y-1/2 flex-col gap-8 z-10 pointer-events-none">
+  {["k9.jpg","k8.jpg","k7.jpg"].map((img, i) => (
+    <img
+      key={i}
+      src={`/images/${img}`}
+      className="w-32 xl:w-40 opacity-40 animate-[float_9s_ease-in-out_infinite]"
+      alt=""
+    />
+  ))}
 </div>
+
 
  <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="
-        relative z-20
-        w-full max-w-3xl mx-auto
-        bg-white/5 backdrop-blur-xl
-        border border-white/10
-        rounded-3xl p-8
-        text-purple-200
-        max-h-[85vh] overflow-y-auto
-      "
+     className="
+  relative z-20
+  w-[95%] sm:w-[90%] md:max-w-3xl
+  mx-auto
+  bg-white/5 backdrop-blur-xl
+  border border-white/10
+  rounded-2xl sm:rounded-3xl
+  p-5 sm:p-8
+  text-purple-200
+  max-h-[90vh]
+  overflow-y-auto
+"
     >
       {/* 🎧 Audio Player */}
-      <div className="mb-8">
-        <audio ref={audioRef} controls preload="metadata" className="w-full rounded-lg">
-          <source src="/audio/कम्बल वाली मीठी रात.mp3" type="audio/mpeg" />
-        </audio>
-      </div>
+<div className="mb-8">
+  <audio
+    ref={audioRef}
+    controls
+    preload="metadata"
+    className="w-full rounded-lg sticky top-0 z-30 bg-black/60 backdrop-blur-md"
+  >
+    <source src="/audio/कम्बल वाली मीठी रात.mp3" type="audio/mpeg" />
+  </audio>
+</div>
+
+
+      {/* 🌸 Mobile Top Images */}
+<div className="flex lg:hidden justify-center gap-4 mb-6">
+  <img src="/images/k7.jpg" className="w-20 opacity-40" />
+  <img src="/images/k8.jpg" className="w-24 opacity-50" />
+  <img src="/images/k9.jpg" className="w-20 opacity-40" />
+</div>
+
 
       {/* 📝 Lyrics */}
-      <div className="space-y-8 leading-relaxed text-lg">
+     <div className="space-y-8 leading-relaxed text-base sm:text-lg">
         <section>
-          <h3 className="text-pink-400 font-semibold mb-2">[Verse 1]</h3>
+          <h3 className="text-pink-400 font-semibold mb-2 text-base sm:text-lg">[Verse 1]</h3>
           <p>
             खामोश शाम थी<br />
             तेरा हाथ था मेरे हाथ में<br />
@@ -107,7 +112,7 @@ export default function BlanketNightSong() {
         </section>
 
         <section>
-          <h3 className="text-pink-400 font-semibold mb-2">[Chorus]</h3>
+          <h3 className="text-pink-400 font-semibold mb-2 text-base sm:text-lg">[Chorus]</h3>
           <p>
             कम्बल वाली मीठी रात<br />
             तेरे संग<br />
@@ -126,7 +131,7 @@ export default function BlanketNightSong() {
         </section>
 
         <section>
-          <h3 className="text-pink-400 font-semibold mb-2">[Verse 2]</h3>
+          <h3 className="text-pink-400 font-semibold mb-2 text-base sm:text-lg">[Verse 2]</h3>
           <p>
             स्क्रीन पर चलते थे<br />
             किसी और के किस्से हौले से<br />
@@ -142,7 +147,7 @@ export default function BlanketNightSong() {
         </section>
 
         <section>
-          <h3 className="text-pink-400 font-semibold mb-2">[Bridge]</h3>
+          <h3 className="text-pink-400 font-semibold mb-2 text-base sm:text-lg">[Bridge]</h3>
           <p>
             सुबह हुई तो<br />
             सिर था मेरी गोद में आराम से <br />
@@ -160,7 +165,7 @@ export default function BlanketNightSong() {
 
           {/* Chorus repeat */}
         <section>
-          <h3 className="text-pink-400 font-semibold mb-2">[Chorus]</h3>
+         <h3 className="text-pink-400 font-semibold mb-2 text-base sm:text-lg">[Chorus]</h3>
           <p>
             कम्बल वाली मीठी रात<br />
             तेरे संग<br />
@@ -168,6 +173,14 @@ export default function BlanketNightSong() {
           </p>
         </section>
       </div>
+
+      {/* 🌸 Mobile Bottom Images */}
+<div className="flex lg:hidden justify-center gap-4 mt-10">
+  <img src="/images/k9.jpg" className="w-20 opacity-40" />
+  <img src="/images/k8.jpg" className="w-24 opacity-50" />
+  <img src="/images/k7.jpg" className="w-20 opacity-40" />
+</div>
+
 
       {/* ⬅️ Back Button (FIXED) */}
       <motion.button

@@ -14,7 +14,7 @@ const dancing = Dancing_Script({
 });
 
 export const metadata = {
-  title: "Krishu's",
+  title: "Krishu's💞Ek_ehsas💞",
   description: "A little surprise made just for you, open it with a smile ❤️",
 };
 
