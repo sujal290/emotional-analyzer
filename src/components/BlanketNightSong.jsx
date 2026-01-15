@@ -135,9 +135,30 @@
 
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
+import { useEffect, useRef } from "react"
 
 export default function BlanketNightSong() {
   const router = useRouter()
+  const audioRef = useRef(null)
+
+  useEffect(() => {
+  const audio = audioRef.current
+  if (!audio) return
+
+  audio.volume = 0
+  audio.play().catch(() => {}) // safe autoplay
+
+  // smooth fade-in
+  let v = 0
+  const fade = setInterval(() => {
+    v += 0.05
+    audio.volume = Math.min(v, 1)
+    if (v >= 1) clearInterval(fade)
+  }, 200)
+
+  return () => clearInterval(fade)
+}, [])
+  
 
   return (
     <motion.div
@@ -156,7 +177,7 @@ export default function BlanketNightSong() {
     >
       {/* 🎧 Audio Player */}
       <div className="mb-8">
-        <audio controls preload="metadata" className="w-full rounded-lg">
+        <audio ref={audioRef} controls preload="metadata" className="w-full rounded-lg">
           <source src="/audio/कम्बल वाली मीठी रात.mp3" type="audio/mpeg" />
         </audio>
       </div>
