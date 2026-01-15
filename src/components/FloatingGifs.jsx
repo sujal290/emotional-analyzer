@@ -1,70 +1,3 @@
-// "use client"
-
-// import { motion } from "framer-motion"
-
-// /* GIF SOURCES */
-// const GIFS = [
-// //   "/gif/cute.gif",
-//   "/gif/please.gif",
-//   "/gif/tears.gif",
-//   "/gif/cut.gif",
-//   "/gif/dance.gif",
-//   "/gif/kissss.gif",
-//   "/gif/touch.gif",
-//   "/gif/eye.gif",
-// ]
-
-// /* HOW MANY FLOATING GIFS */
-// const TOTAL_GIFS = 100
-
-// export default function FloatingGifs() {
-//   return (
-//     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-//       {Array.from({ length: TOTAL_GIFS }).map((_, index) => {
-//         const gif = GIFS[index % GIFS.length]
-
-//         /* 🔥 BIGGER SIZE */
-//         const size = 48 + Math.random() * 92   // 48px → 140px
-
-//         const startX = Math.random() * 100
-//         const endX = Math.random() * 100
-//         const duration = 20 + Math.random() * 25
-//         const delay = Math.random() * 20
-//         const opacity = 0.2 + Math.random() * 0.4
-
-//         return (
-//           <motion.img
-//             key={index}
-//             src={gif}
-//             alt="floating gif"
-//             className="absolute"
-//             style={{
-//               width: size,
-//               height: size,
-//               opacity,
-//             }}
-//             initial={{
-//               x: `${startX}vw`,
-//               y: "110vh",
-//             }}
-//             animate={{
-//               x: `${endX}vw`,
-//               y: "-25vh",
-//             }}
-//             transition={{
-//               duration,
-//               delay,
-//               repeat: Infinity,
-//               ease: "linear",
-//             }}
-//           />
-//         )
-//       })}
-//     </div>
-//   )
-// }
-
-
 "use client"
 
 import { motion } from "framer-motion"
@@ -81,7 +14,7 @@ const GIFS = [
 ]
 
 /* HOW MANY FLOATING GIFS */
-const TOTAL_GIFS = 1000
+const TOTAL_GIFS = 6
 
 export default function FloatingGifs() {
   return (
