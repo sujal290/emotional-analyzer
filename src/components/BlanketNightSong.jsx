@@ -219,7 +219,7 @@ export default function BlanketNightSong() {
           <h3 className="text-pink-400 font-semibold mb-2">[Bridge]</h3>
           <p>
             सुबह हुई तो<br />
-            सिर था मेरी गोद में आराम से<br />
+            सिर था मेरी गोद में आराम से <br />
             कॉफी ठंडी<br />
             पर<br />
             गरमी थी तेरे सुबुक साँस में
