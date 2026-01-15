@@ -426,3 +426,13 @@ button {
 .glow-text {
   text-shadow: 0 0 12px rgba(255,120,180,0.6);
 }
+
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
