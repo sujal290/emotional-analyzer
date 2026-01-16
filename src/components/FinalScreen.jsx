@@ -6,7 +6,6 @@ import { Heart } from "lucide-react"
 import { useRouter } from "next/navigation"
 import confetti from "canvas-confetti"
 
-
 export default function FinalScreen({ onNext }) {
   const [cardOpen, setCardOpen] = useState(false)
   const [displayedText, setDisplayedText] = useState("")
@@ -14,6 +13,7 @@ export default function FinalScreen({ onNext }) {
   const [showOverlay, setShowOverlay] = useState(false)
   const messageRef = useRef(null)
   const router = useRouter()
+  const [showFullMessage, setShowFullMessage] = useState(false)
   const fireConfetti = () => {
   const colors = ["#ff4d6d", "#ff80b5", "#c084fc", "#a855f7"]
 
@@ -23,6 +23,14 @@ export default function FinalScreen({ onNext }) {
     origin: { y: 0.75 },
     colors,
   })
+}
+   const downloadMessage = () => {
+  const a = document.createElement("a")
+  a.href = "/images/image.png"          
+  a.download = "Bas-itna-hi.png" 
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
 }
 
 
@@ -75,7 +83,6 @@ export default function FinalScreen({ onNext }) {
     setShowOverlay(true);
 
     const colors = ["#ff4d6d", "#ff80b5", "#c084fc", "#a855f7", "#f472b6", "#fb7185"];
-
     const count = 200;
     const defaults = { origin: { y: 0.8 }, colors };
 
@@ -169,7 +176,7 @@ export default function FinalScreen({ onNext }) {
                   }}
                 >
                   <div className="font-love love-glow text-pink-200 leading-relaxed whitespace-pre-line text-lg md:text-xl glow-text">
-                    {displayedText}
+                   {showFullMessage ? proposalMessage : displayedText}
                     {!typingComplete && (
                       <motion.span
                         className="text-pink-400"
@@ -202,26 +209,6 @@ export default function FinalScreen({ onNext }) {
                 Hope You will going to love it...!
               </motion.h2>
 
-              {/* <motion.button
-                onClick={() => router.push("/analyzer")}
-                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 text-xl font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-2xl flex items-center justify-center mx-auto"
-              >
-                <Heart className="w-5 h-5 mr-2 fill-current" />
-                Lets seeee.....
-                <Heart className="w-5 h-5 ml-2 fill-current" />
-
-              </motion.button> */}
-
-              {/* <button
-                onClick={() => {
-                  fireConfetti()
-                  onNext()
-                }}
-              >
-                Play Song 🎵
-              </button> */}
-
-
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
 
                 {/* Analyzer Button */}
@@ -247,8 +234,19 @@ export default function FinalScreen({ onNext }) {
 
               </div>
 
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
 
-                            
+                    {/* 📥 Download Message */}
+                    <motion.button
+                      onClick={downloadMessage}
+                      className="bg-white/10 border border-white/20
+                                text-pink-300 px-6 py-3 rounded-full
+                                hover:bg-white/20 transition"
+                    >
+                      ⬇ Download Message
+                    </motion.button>
+                  </div>
+                 
             </motion.div>
           )}
         </AnimatePresence>

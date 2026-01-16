@@ -6,7 +6,7 @@ import { useEffect, useRef,useState } from "react"
 import EndMessage from "./EndMessage"
 
 
-export default function BlanketNightSong() {
+export default function BlanketNightSong({ onBack }) {
   const router = useRouter()
   const audioRef = useRef(null)
   const [showEnd, setShowEnd] = useState(false)
@@ -188,7 +188,7 @@ export default function BlanketNightSong() {
 
       {/* ⬅️ Back Button (FIXED) */}
       <motion.button
-        onClick={() => router.back()}
+        onClick={onBack}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         className="

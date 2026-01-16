@@ -204,7 +204,9 @@ export default function ProposalSite() {
     transition={{ duration: 1 }}
     className="min-h-screen flex items-center justify-center px-4"
   >
-    <BlanketNightSong />
+   <BlanketNightSong
+      onBack={() => setCurrentScreen("final")}
+    />
   </motion.div>
 )}
 
