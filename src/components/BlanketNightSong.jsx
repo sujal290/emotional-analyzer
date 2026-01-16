@@ -2,11 +2,14 @@
 
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef,useState } from "react"
+import EndMessage from "./EndMessage"
+
 
 export default function BlanketNightSong() {
   const router = useRouter()
   const audioRef = useRef(null)
+  const [showEnd, setShowEnd] = useState(false)
 
   useEffect(() => {
   const audio = audioRef.current
@@ -75,6 +78,7 @@ export default function BlanketNightSong() {
 <div className="mb-8">
   <audio
     ref={audioRef}
+    onEnded={() => setShowEnd(true)}
     controls
     preload="metadata"
     className="w-full rounded-lg sticky top-0 z-30 bg-black/60 backdrop-blur-md"
@@ -199,6 +203,8 @@ export default function BlanketNightSong() {
         ⬅ Back
       </motion.button>
     </motion.div>
+    {showEnd && <EndMessage onClose={() => setShowEnd(false)} />}
+
 </>
    
   )
